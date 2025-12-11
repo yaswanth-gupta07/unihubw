@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "kill-port": "node scripts/kill-port.js",
+    "predev": "npm run kill-port",
+    "prestart": "npm run kill-port"
   },
   "keywords": [
     "unihub",
@@ -18,7 +21,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "mongodb": "^7.0.0",
     "mongoose": "^8.0.3"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
 const Application = require('../models/Application');
 
@@ -63,7 +64,7 @@ router.post('/submit', async (req, res) => {
         res.status(500).json({
             success: false,
             message: 'Server error. Please try again later.',
-            error: error.message
+            error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
         });
     }
 });
@@ -82,7 +83,7 @@ router.get('/all', async (req, res) => {
         res.status(500).json({
             success: false,
             message: 'Server error. Please try again later.',
-            error: error.message
+            error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
         });
     }
 });
@@ -90,6 +91,14 @@ router.get('/all', async (req, res) => {
 // Get single application by ID
 router.get('/:id', async (req, res) => {
     try {
+        // Validate MongoDB ObjectId format
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid application ID format'
+            });
+        }
+
         const application = await Application.findById(req.params.id);
         if (!application) {
             return res.status(404).json({
@@ -106,7 +115,7 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({
             success: false,
             message: 'Server error. Please try again later.',
-            error: error.message
+            error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
         });
     }
 });
