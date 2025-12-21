@@ -42,11 +42,11 @@ const applicationSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    hours: {
-        type: String,
-        required: true,
-        enum: ['2-4 hours', '4-8 hours', '8+ hours']
-    },
+    // hours: {
+    //     type: String,
+    //     required: true,
+    //     enum: ['2-4 hours', '4-8 hours', '8+ hours']
+    // },
     linkedin: {
         type: String,
         trim: true,
