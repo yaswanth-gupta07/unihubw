@@ -15,13 +15,13 @@ router.post('/submit', async (req, res) => {
             role,
             skills,
             contribute,
-            // hours,
+            hours,
             linkedin,
             portfolio
         } = req.body;
 
         // Validate required fields
-        if (!fullName || !email || !phone || !college || !year || !role || !skills || !contribute) {
+        if (!fullName || !email || !phone || !college || !year || !role || !skills || !contribute || !hours) {
             return res.status(400).json({
                 success: false,
                 message: 'Please fill in all required fields'
@@ -47,7 +47,7 @@ router.post('/submit', async (req, res) => {
             role,
             skills,
             contribute,
-            // hours,
+            hours,
             linkedin: linkedin || '',
             portfolio: portfolio || ''
         });
